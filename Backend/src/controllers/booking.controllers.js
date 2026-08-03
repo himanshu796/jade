@@ -2,7 +2,7 @@ import prisma from '../config/prismaClient.js'
 import { asyncHandler } from '../utils/asyncHandler.js'
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
-import { cleanupStaleBookings } from '../utils/cleanUpStaleBookings.js'
+import { cleanupStaleBookings } from '../utils/cleanupStaleBookings.js'
 
 
 // ************************* Create Booking **************************
