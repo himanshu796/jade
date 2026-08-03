@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `room` MODIFY `type` ENUM('SINGLE', 'DOUBLE', 'SUITE', 'DELUXE', 'STUDIO') NOT NULL;

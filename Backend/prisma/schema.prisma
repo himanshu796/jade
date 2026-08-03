@@ -1,0 +1,173 @@
+// This is your Prisma schema file,
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  user_id Int @id @default(autoincrement())
+  fullname String
+  email String @unique
+  password String
+  role Role @default(GUEST)
+  mobile_number String?
+  address String?
+  payments Payment[]
+  refreshToken String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bookings Booking[]
+}
+
+model RoomType{
+  id Int @id @default(autoincrement())
+  category RoomCategory @unique
+  price Float
+  maxGuests Int @default(1)
+  image String?
+  description String? @db.Text
+  area Int?  
+  createdAt DateTime @default(now())
+  updatedAt   DateTime     @updatedAt
+  rooms       Room[]
+}
+
+model Room{
+  room_id Int @id @default(autoincrement())
+  number String @unique
+  roomTypeId Int      //New: FK to RoomType
+  roomType RoomType @relation(fields:[roomTypeId], references:[id])
+  isActive Boolean @default(true)
+  createdAt  DateTime @default(now())
+  bookings   Booking[]
+}
+
+model Booking{
+  booking_id Int @id @default(autoincrement())
+  userId Int
+  roomId Int
+  checkIn DateTime
+  checkOut DateTime
+  status BookingStatus @default(PENDING)
+  payment Payment?
+  totalPrice Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields: [userId], references: [user_id])
+  room Room @relation(fields: [roomId], references: [room_id])
+}
+
+enum Role{
+  GUEST
+  STAFF
+  ADMIN
+}
+
+enum RoomCategory{
+  DOUBLE
+  DELUXE
+  EXECUTIVE_SUITE
+  EXECUTIVE_SUITE_DUPLEX
+}
+
+enum BookingStatus{
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Payment{
+  payment_id Int @id @default(autoincrement())
+  bookingId Int @unique
+  userId Int
+  amount Float
+  currency String @default("INR")
+  status PaymentStatus @default(PENDING)
+  razorpayOrderId String @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  booking Booking @relation(fields:[bookingId], references:[booking_id])
+  user User @relation(fields:[userId], references:[user_id])
+}
+
+enum PaymentStatus{
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model HeroSlide{
+  id Int @id @default(autoincrement())
+  imageUrl String
+  order Int @unique
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DiningGallery {
+  id          Int      @id @default(autoincrement())
+  title       String @unique
+  description String?
+  imageUrl    String
+  category    DiningCategory @default(DINING)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum DiningCategory {
+  DINING
+  BAR
+}
+
+model Attraction {
+  id Int @id @default(autoincrement())
+  title String @unique
+  description String @db.Text
+  imageUrl String
+  distance String
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Amenity{
+  id Int @id @default(autoincrement())
+  title String @unique
+  icon String //storing icon name as String
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review{
+  id Int @id @default(autoincrement())
+  name String @unique
+  email String?
+  rating Int
+  comment String @db.Text
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model About{
+  id Int @id @default(autoincrement())
+  storyParagraphs String @db.Text
+  ownerImage String
+  ownerName String @unique
+  visionParagraphs String @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
