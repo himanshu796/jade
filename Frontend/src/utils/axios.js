@@ -5,7 +5,6 @@ export const axiosInstance = axios.create({
     withCredentials: true               // sends cookies with every request
 })
 
-
 // Interceptor - handle token expiry automatically
 axiosInstance.interceptors.response.use(
     (response) => response,
