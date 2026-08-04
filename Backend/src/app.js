@@ -6,8 +6,10 @@ const app = express()
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
-    credentials: true
+    credentials: true,
 }))
+
+console.log("CORS_ORIGIN is:", process.env.CORS_ORIGIN)
 
 // Webhook route needs RAW body — must come BEFORE express.json()
 app.use('/api/v1/payments/webhook', express.raw({ type: 'application/json' }))
