@@ -90,7 +90,7 @@ const usePayment = () => {
                         if (onSuccess) {
                             onSuccess();
                         } else {
-                            navigate("/booking-success");
+                            navigate("/my-bookings");
                         }
                     } catch (err) {
                         setError?.(err.response?.data?.message || err.message || "Payment verification failed.");
