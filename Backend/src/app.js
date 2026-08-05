@@ -9,6 +9,8 @@ app.use(cors({
     credentials: true,
 }))
 
+app.options('*', cors())
+
 console.log("CORS_ORIGIN is:", process.env.CORS_ORIGIN)
 
 // Webhook route needs RAW body — must come BEFORE express.json()
