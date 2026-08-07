@@ -4,6 +4,12 @@ import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import { cleanupStaleBookings } from '../utils/cleanupStaleBookings.js'
 
+// GST calculation
+const getGstRate = (pricePerNight) => {
+    if (pricePerNight <= 1000) return 0
+    if (pricePerNight <= 7500) return 0.05
+    return 0.18
+}
 
 // ************************* Create Booking **************************
 const createBooking = asyncHandler(async (req, res) => {
@@ -70,7 +76,14 @@ const createBooking = asyncHandler(async (req, res) => {
         (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
     )
 
-    const totalPrice = days * roomType.price
+    // Subtotal is now the pre-tax figure
+    // GST is calculated and added on top
+    // Total Amount
+    const subtotal = days * roomType.price
+    const gstRate = getGstRate(roomType.price)
+    const taxAmount = Math.round(subtotal * gstRate)
+    const totalPrice = subtotal + taxAmount
+
 
     // create booking
     const booking = await prisma.booking.create({
