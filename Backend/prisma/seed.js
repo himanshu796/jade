@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
-// HeroSlideSection
 async function main() {
+    // HeroSlideSection
     const slides = [
         { imageUrl: 'https://res.cloudinary.com/dyoxqmbvt/image/upload/v1781674421/jade4_gsrdpy.jpg', order: 1, isActive: true },
         { imageUrl: 'https://res.cloudinary.com/dyoxqmbvt/image/upload/v1781674421/jade3_uq8uc9.jpg', order: 2, isActive: true },
@@ -20,6 +20,20 @@ async function main() {
             create: slide
         })
     }
+
+    // Welcome Section
+    const welcome = {
+        subheading: "Welcome to",
+        heading: "Jade River Resort",
+        paragraphs: "Set across more than 10 acres of pristine landscape in the Pahalgam            region of Kashmir, Jade River Resort by Defoy offers a rare blend of untouched natural beauty and refined hospitality. The property is uniquely defined by gushing river streams that flow through the estate, creating a constantly soothing oundscape and an immersive connection with nature. \n\n The resort features elegantly designed wooden cottages that reflect the region’s architectural charm while maintaining modern comfort standards. Guests can choose from premium rooms with private balconies, spacious suites, and exclusive duplex suites—all thoughtfully positioned to offer uninterrupted views of the surrounding greenery and flowing waters. \n\n A standout feature of the resort is its natural swimming pool, designed to harmonize with the environment rather than disrupt it, offering a refreshing and authentic experience. The on-site restaurant serves a curated selection of local and multi-cuisine dishes, while the café provides a relaxed setting for lighter meals and conversations against scenic backdrops. \n\n For corporate and group travelers, the resort includes a well-equipped conference hall, making it suitable for offsites, retreats, and private events. Despite its tranquil setting, the     property is structured to cater to both leisure and business needs with equal finesse. Jade River Resort by Defoy is positioned as a destination for slow, immersive travel—where guests are encouraged to unwind, reconnect, and experience Kashmir beyond the usual pace."
+    }
+
+    await prisma.welcome.upsert({
+        where: { id: 1 },
+        update: welcome,
+        create: { id: 1, ...welcome }
+    })
+
 
     // Rooms
     const roomTypesData = [
@@ -61,7 +75,7 @@ async function main() {
     for (const rt of roomTypesData) {
         const roomType = await prisma.roomType.upsert({
             where: { category: rt.category },
-            update: rt, 
+            update: rt,
             create: rt
         })
         roomTypeByCategory[rt.category] = roomType
