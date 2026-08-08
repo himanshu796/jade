@@ -50,8 +50,8 @@ const HeroSlideSection = () => {
   // No slides
   if (slides.length === 0) {
     return (
-      <div className="w-full h-[60vh] sm:h-[70vh] md:h-[85vh] bg-[#1a3c2e] flex items-center justify-center">
-        <p className="text-white text-xl tracking-widest">
+      <div className="w-full h-[60vh] sm:h-[70vh] md:h-[85vh] bg-[#F6F5F2] flex items-center justify-center">
+        <p className="text-[#1a3c2e] text-xl tracking-widest">
           No slides available
         </p>
       </div>
