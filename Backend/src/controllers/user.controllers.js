@@ -115,6 +115,10 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.status(200)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
+        .cookie("isLoggedIn", "true", {
+            ...options,
+            httpOnly: false
+        })
         .json(
             new ApiResponse(200, {
                 user: userWithoutSensitiveData
@@ -140,6 +144,10 @@ const logoutUser = asyncHandler(async (req, res) => {
     return res.status(200)
         .clearCookie("accessToken", options)
         .clearCookie("refreshToken", options)
+        .clearCookie("isLoggedIn", {
+            ...options,
+            httpOnly: false
+        })
         .json(
             new ApiResponse(200, {}, "User logged out")
         )
@@ -150,7 +158,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies?.refreshToken || req.body.refreshToken
 
     if (!incomingRefreshToken) {
-        throw new ApiError(401, "Unauthorised request 2")        
+        throw new ApiError(401, "Unauthorised request 2")
     }
 
     try {
@@ -164,11 +172,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         })
 
         if (!user) {
-            throw new ApiError(401, "Invalid refresh token")            
+            throw new ApiError(401, "Invalid refresh token")
         }
 
         if (user.refreshToken !== incomingRefreshToken) {
-            throw new ApiError(401, "Refresh token is expired or used")           
+            throw new ApiError(401, "Refresh token is expired or used")
         }
 
         const options = {
@@ -188,12 +196,21 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         return res.status(200)
             .cookie("accessToken", accessToken, options)
             .cookie("refreshToken", newRefreshToken, options)
+            .cookie("isLoggedIn", "true", {
+                ...options,
+                httpOnly: false
+            })
             .json(
                 new ApiResponse(200, {}, "Access Token refreshed")
             )
     } catch (error) {
+        res.clearCookie("isLoggedIn", {
+            httpOnly: false,
+            secure: true,
+            sameSite: "none"
+        })
         if (error instanceof ApiError) throw error
-        throw new ApiError(401, error?.message || "Invalid refresh token")        
+        throw new ApiError(401, error?.message || "Invalid refresh token")
     }
 })
 
@@ -325,6 +342,10 @@ const deleteProfile = asyncHandler(async (req, res) => {
     return res.status(200)
         .clearCookie("accessToken", options)
         .clearCookie("refreshToken", options)
+        .clearCookie("isLoggedIn", {
+            ...options,
+            httpOnly: false
+        })
         .json(new ApiResponse(200, {}, "Account deleted successfully"))
 })
 
