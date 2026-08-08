@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getWelcomeImage } from "../../services/imageService";
+import { getWelcomeData } from "../../services/welcomeService";
 
 const WelcomeSection = () => {
   const [imageUrl, setImageUrl] = useState(null);
