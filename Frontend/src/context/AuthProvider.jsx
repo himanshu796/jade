@@ -7,6 +7,17 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const hasSession = document.cookie
+      .split("; ")
+      .some((row) => row.startsWith("isLoggedIn=true"));
+
+    if (!hasSession) {
+      // No session was ever established on this browser — skip the network call entirely
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     axiosInstance
       .get("/users/profile")
       .then((response) => {
