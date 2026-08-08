@@ -34,9 +34,11 @@ import attractionRouter from './routes/attraction.routes.js'
 import amenitiesRouter from './routes/amenities.routes.js'
 import reviewRouter from './routes/review.routes.js'
 import aboutRouter from './routes/about.routes.js'
+import welcomeRouter from './routes/welcome.routes.js'
 
 // routes declaration
 app.use('/api/v1/users', userRouter)
+app.use('api/v1/welcome', welcomeRouter)
 app.use('/api/v1/rooms', roomRouter)
 app.use('/api/v1/bookings', bookingRouter)
 app.use('/api/v1/payments', paymentRouter)
