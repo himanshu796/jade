@@ -151,6 +151,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
     if (!incomingRefreshToken) {
         throw new ApiError(401, "Unauthorised request")
+        console.log("First throw");
+        
     }
 
     try {
@@ -165,10 +167,14 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
         if (!user) {
             throw new ApiError(401, "Invalid refresh token")
+            console.log("Second throw");
+            
         }
 
         if (user.refreshToken !== incomingRefreshToken) {
             throw new ApiError(401, "Refresh token is expired or used")
+            console.log("Third throw");
+            
         }
 
         const options = {
@@ -194,6 +200,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     } catch (error) {
         if (error instanceof ApiError) throw error
         throw new ApiError(401, error?.message || "Invalid refresh token")
+        console.log("Fourth throw");
+        
     }
 })
 
