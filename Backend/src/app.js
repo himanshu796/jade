@@ -38,7 +38,7 @@ import welcomeRouter from './routes/welcome.routes.js'
 
 // routes declaration
 app.use('/api/v1/users', userRouter)
-app.use('api/v1/welcome', welcomeRouter)
+app.use('/api/v1/welcome', welcomeRouter)
 app.use('/api/v1/rooms', roomRouter)
 app.use('/api/v1/bookings', bookingRouter)
 app.use('/api/v1/payments', paymentRouter)
