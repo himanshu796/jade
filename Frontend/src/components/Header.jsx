@@ -80,12 +80,12 @@ const Header = () => {
         </div>
 
         {/* Center - Logo & Hotel Name  */}
-        <div className="flex items-center justify-center gap-2 flex-1 mx-2">
+        <div className="flex items-center gap-2 cursor-pointer shrink-0">
           <Link to="/" className="flex items-center gap-2 cursor-pointer">
             <img
               src={jadeLogoImg}
               alt="Jade logo"
-              className="w-12 h-12 rounded-full"
+              className="w-12 h-12 rounded-full shrink-0"
             />
           </Link>
           <h1 className="text-[#F6F5F2] text-xl sm:text-2xl md:text-4xl tracking-widest hahmlet-heading text-center">
