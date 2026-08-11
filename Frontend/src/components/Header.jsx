@@ -81,7 +81,7 @@ const Header = () => {
 
         {/* Center - Logo & Hotel Name  */}
         <div className="flex items-center justify-center gap-2 flex-1 mx-2 min-w-0">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
+          <Link to="/" className="flex items-center gap-1 shrink-0">
             <img
               src={jadeLogoImg}
               alt="Jade logo"
