@@ -25,7 +25,7 @@ const StarRating = ({ rating }) => {
 // Single Review card
 const ReviewCard = ({ review }) => {
   return (
-    <div className="min-w-70 sm:min-w-80 md:min-w-90 bg-white rounded-xl shadow-lg p-6 shrink-0 flex flex-col gap-4 border border-gray-100">
+    <div className="w-[80vw] max-w-70 sm:w-80 md:w-96 sm:max-w-none bg-white rounded-xl shadow-lg p-6 shrink-0 flex flex-col gap-4 border border-gray-100">
       {/* Top - Name & Source */}
       <div className="flex items-center justify-between">
         {/* Avatar with initials */}
@@ -128,7 +128,7 @@ const ReviewSection = () => {
 
       {/* Slider */}
       <div ref={sliderRef} className="w-full overflow-hidden">
-        <div className="flex gap-6 px-6" style={{ width: "max-content" }}>
+        <div className="flex gap-4 sm:gap-6 px-4 sm:px-6" style={{ width: "max-content" }}>
           {/* Duplicate for seamless loop */}
           {[...reviews, ...reviews].map((review, index) => (
             <ReviewCard key={index} review={review} />
