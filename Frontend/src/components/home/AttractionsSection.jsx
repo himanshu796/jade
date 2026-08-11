@@ -38,8 +38,8 @@ const AttractionsSection = () => {
     const handleMouseEnter = () => (isPaused.current = true);
     const handleMouseLeave = () => (isPaused.current = false);
 
-    slider.addEventListener("mouseenter", handleMouseEnter);
-    slider.addEventListener("mouseleave", handleMouseLeave);
+    track.addEventListener("mouseenter", handleMouseEnter);
+    track.addEventListener("mouseleave", handleMouseLeave);
 
     const interval = setInterval(tick, 16);
 
