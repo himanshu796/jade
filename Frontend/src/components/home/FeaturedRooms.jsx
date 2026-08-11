@@ -12,7 +12,7 @@ const RoomRow = ({ room, index }) => {
   return (
     <div
       ref={ref}
-      className="w-full min-h-0 sm:min-h-[70vh] flex items-center py-4 sm:py-16"
+      className="w-full min-h-0 sm:min-h-[70vh] flex items-center py-10 sm:py-16"
     >
       <div
         className={`max-w-6xl lg:max-w-7xl mx-auto w-full flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center justify-center gap-8 md:gap-12 px-4 sm:px-8`}
