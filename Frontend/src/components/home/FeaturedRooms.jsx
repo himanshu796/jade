@@ -12,7 +12,7 @@ const RoomRow = ({ room, index }) => {
   return (
     <div
       ref={ref}
-      className="w-full min-h-[70vh] flex items-center py-12 sm:py-16"
+      className="w-full min-h-0 sm:min-h-[70vh] flex items-center py-4 sm:py-16"
     >
       <div
         className={`max-w-6xl lg:max-w-7xl mx-auto w-full flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center justify-center gap-8 md:gap-12 px-4 sm:px-8`}
@@ -84,7 +84,7 @@ const FeaturedRooms = () => {
   }
   return (
     <section className="w-full bg-[#F6F5F2] px-4 sm:px-8 md:px-16 py-12 sm:py-16 md:py-20">
-      <div className="mb-10 sm:mb-14">
+      <div className="mb-2 sm:mb-14">
         <h2 className="text-[#234E3B] text-2xl sm:text-3xl md:text-4xl font-bold font-serif">
           Accommodations
         </h2>
