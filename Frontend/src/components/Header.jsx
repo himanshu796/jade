@@ -85,7 +85,7 @@ const Header = () => {
             <img
               src={jadeLogoImg}
               alt="Jade logo"
-              className="w-12 h-12 sm:w-12 sm:h-12 rounded-full shrink-0"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full shrink-0"
             />
           </Link>
           <h1 className="text-[#F6F5F2] text-lg sm:text-2xl md:text-4xl tracking-widest hahmlet-heading text-center">
