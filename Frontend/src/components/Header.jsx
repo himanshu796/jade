@@ -154,7 +154,7 @@ const Header = () => {
             </div>
           )}
           <button
-            className="bg-[#2F3437] text-[#F6F5F2] font-semibold rounded-lg cursor-pointer border-2 border-transparent hover:border-[rgb(76,141,175)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed w-9 h-9 flex items-center justify-center text-xs sm:w-auto sm:h-auto sm:px-6 sm:py-2 sm:text-sm"
+            className="bg-[#2F3437] text-[#F6F5F2] font-semibold text-[11px] sm:text-sm tracking-wide px-2.5 sm:px-6 py-1.5 sm:py-2 rounded-xl cursor-pointer whitespace-nowrap border-2 border-transparent hover:border-[#4C8DAF] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             onClick={handleBookClick}
             disabled={loading}
             aria-label="Book a room"
