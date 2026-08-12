@@ -83,8 +83,7 @@ const AttractionsSection = () => {
         {[...attractions, ...attractions].map((attraction, index) => (
           <div
             key={index}
-            className="shrink-0 bg-white rounded-2xl overflow-hidden   flex flex-col"
-            style={{ width: "380px" }}
+            className="shrink-0 bg-white rounded-2xl overflow-hidden flex flex-col w-65 sm:w-80 md:w-95"
           >
             {/* Image */}
             <div className="overflow-hidden">
